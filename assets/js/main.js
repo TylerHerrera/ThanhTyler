@@ -114,5 +114,15 @@
 
 			});
 
-
+caption: function ($a) {
+  return (
+    $a.attr('data-caption') ||
+    $a.attr('title') ||
+    $a.find('img').attr('alt') ||
+    $a.next('h3').text() || // fallback for old items
+    ''
+  );
+},
+	
 })(jQuery);
+
