@@ -114,15 +114,32 @@
 
 			});
 
-caption: function ($a) {
-  return (
-    $a.attr('data-caption') ||
-    $a.attr('title') ||
-    $a.find('img').attr('alt') ||
-    $a.next('h3').text() || // fallback for old items
-    ''
-  );
-},
+	// Lightbox caption
+	$window.on('load', function () {
+	  // Initialize Poptrox for ALL gallery sections
+	  $('.gallery').poptrox({
+	    caption: function ($a) {
+	      return (
+	        $a.attr('data-caption') ||               // <a data-caption="...">
+	        $a.attr('title') ||                      // <a title="...">
+	        $a.find('img').attr('alt') ||            // <img alt="...">
+	        $a.next('h3').text() ||                  // fallback to hidden <h3>
+	        ''
+	      );
+	    },
+	    overlayColor: '#2c2c2c',
+	    overlayOpacity: 0.85,
+	    popupCloserText: '',
+	    popupLoaderText: '',
+	    selector: '.work-item a.image',
+	    usePopupCaption: true,
+	    usePopupDefaultStyling: false,
+	    usePopupEasyClose: false,
+	    usePopupNav: true,
+	    windowMargin: (breakpoints.active('<=small') ? 0 : 50)
+	  });
+	});
 	
 })(jQuery);
+
 
