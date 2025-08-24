@@ -93,53 +93,34 @@
 
 			}
 
-	// Main Sections: Two.
+	// Main Sections
 
-		// Lightbox gallery.
-			$window.on('load', function() {
-
-				$('#two, #three, #four').poptrox({
-					caption: function($a) { return $a.next('h3').text(); },
-					overlayColor: '#2c2c2c',
-					overlayOpacity: 0.85,
-					popupCloserText: '',
-					popupLoaderText: '',
-					selector: '.work-item a.image',
-					usePopupCaption: true,
-					usePopupDefaultStyling: false,
-					usePopupEasyClose: false,
-					usePopupNav: true,
-					windowMargin: (breakpoints.active('<=small') ? 0 : 50)
-				});
-
+		// Lightbox: single, global init
+			$window.on('load', function () {
+			  $('.gallery').poptrox({
+				caption: function ($a) {
+				  return (
+					$a.attr('data-caption') ||           // <a data-caption="...">
+					$a.attr('title') ||                  // <a title="...">
+					$a.find('img').attr('alt') ||        // <img alt="...">
+					$a.next('h3').text() ||              // fallback to sibling <h3>
+					''
+				  );
+				},
+				overlayColor: '#2c2c2c',
+				overlayOpacity: 0.85,
+				popupCloserText: '',
+				popupLoaderText: '',
+				selector: '.work-item a.image',          // anchors must have class="image"
+				usePopupCaption: true,
+				usePopupDefaultStyling: false,
+				usePopupEasyClose: false,
+				usePopupNav: true,
+				windowMargin: (breakpoints.active('<=small') ? 0 : 50)
+			  });
 			});
-
-	// Lightbox caption
-	$window.on('load', function () {
-	  // Initialize Poptrox for ALL gallery sections
-	  $('.gallery').poptrox({
-	    caption: function ($a) {
-	      return (
-	        $a.attr('data-caption') ||               // <a data-caption="...">
-	        $a.attr('title') ||                      // <a title="...">
-	        $a.find('img').attr('alt') ||            // <img alt="...">
-	        $a.next('h3').text() ||                  // fallback to hidden <h3>
-	        ''
-	      );
-	    },
-	    overlayColor: '#2c2c2c',
-	    overlayOpacity: 0.85,
-	    popupCloserText: '',
-	    popupLoaderText: '',
-	    selector: '.work-item a.image',
-	    usePopupCaption: true,
-	    usePopupDefaultStyling: false,
-	    usePopupEasyClose: false,
-	    usePopupNav: true,
-	    windowMargin: (breakpoints.active('<=small') ? 0 : 50)
-	  });
-	});
 	
 })(jQuery);
+
 
 
